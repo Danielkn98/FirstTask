@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-public class FirstTask{
+public class FirstTest {
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -19,7 +19,7 @@ public class FirstTask{
     }
 
     @Test
-    public void FirstTask(){
+    public void firstTest(){
         driver.get("https://www.bing.com/");
         driver.findElement(By.name("q")).sendKeys("webdriver");
         driver.findElement(By.id("search_icon")).click();
