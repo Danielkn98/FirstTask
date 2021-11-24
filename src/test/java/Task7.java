@@ -32,9 +32,9 @@ public class Task7 {
         for (int a = appRows.size(), b = 0; a > 0; a--, b++){
             driver.findElements(cssSelector("#box-apps-menu #app-")).get(b).click();
             driver.findElement(By.cssSelector("h1"));
-            if(driver.findElements(By.cssSelector("#box-apps-menu #app- .docs"))!=null){
-                for(int c = driver.findElements(By.cssSelector("#box-apps-menu #app- .docs")).size(), d = 0; c > 0; c--, d++ ){
-                    driver.findElements(By.cssSelector("#box-apps-menu #app- .docs")).get(d).click();
+            if(driver.findElements(By.cssSelector("#box-apps-menu #app- .docs")).size()!=0){
+                for(int c = driver.findElements(By.cssSelector("#box-apps-menu #app- .docs li")).size(), d = 0; c > 0; c--, d++ ){
+                    driver.findElements(By.cssSelector("#box-apps-menu #app- .docs li")).get(d).click();
                     driver.findElement(By.cssSelector("h1"));
                 }
             }
