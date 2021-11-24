@@ -23,7 +23,7 @@ public class FirstTest {
         driver.get("https://www.bing.com/");
         driver.findElement(By.name("q")).sendKeys("webdriver");
         driver.findElement(By.id("search_icon")).click();
-        wait.until(titleIs("webdriver - Поиск"));
+        wait.until(titleIs("webdriver - Bing"));
     }
 
     @After
