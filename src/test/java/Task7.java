@@ -28,13 +28,12 @@ public class Task7 {
         driver.findElement(By.cssSelector("#box-login [name = username]")).sendKeys("admin");
         driver.findElement(By.cssSelector("#box-login [name = password]")).sendKeys("admin");
         driver.findElement(By.cssSelector(".footer [name = login]")).click();
-        List<WebElement> appRows = driver.findElements(cssSelector("#box-apps-menu #app-"));
-        for (int a = appRows.size(), b = 0; a > 0; a--, b++){
-            driver.findElements(cssSelector("#box-apps-menu #app-")).get(b).click();
+        for (int a = 0; a < driver.findElements(cssSelector("#box-apps-menu #app-")).size(); a++){
+            driver.findElements(cssSelector("#box-apps-menu #app-")).get(a).click();
             driver.findElement(By.cssSelector("h1"));
             if(driver.findElements(By.cssSelector("#box-apps-menu #app- .docs")).size()!=0){
-                for(int c = driver.findElements(By.cssSelector("#box-apps-menu #app- .docs li")).size(), d = 0; c > 0; c--, d++ ){
-                    driver.findElements(By.cssSelector("#box-apps-menu #app- .docs li")).get(d).click();
+                for(int b = 0; b < driver.findElements(By.cssSelector("#box-apps-menu #app- .docs li")).size(); b++){
+                    driver.findElements(By.cssSelector("#box-apps-menu #app- .docs li")).get(b).click();
                     driver.findElement(By.cssSelector("h1"));
                 }
             }
