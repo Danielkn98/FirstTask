@@ -50,9 +50,8 @@ public class Task9_1 {
         }
         List <WebElement> countries = driver.findElements(By.cssSelector("tr.row"));
         for(int b = 0; b < countries.size(); b++){
-            if(driver.findElements(By.cssSelector("tr.row")).get(b).getAttribute("textContent").contains("0") == false){
-                WebElement countryrow = driver.findElements(By.cssSelector("tr.row")).get(b);
-                countryrow.findElement(By.cssSelector("a:not([title])")).click();
+            if(countries.get(b).getAttribute("textContent").contains("0") == false){
+                countries.get(b).findElement(By.cssSelector("a:not([title])")).click();
                 assertTrue(isElementPresent(By.cssSelector("#table-zones")));
                 List <WebElement> zonenames = driver.findElements(By.cssSelector("td [name*=name][name*=zones]"));
                 ArrayList <String> zonenamesString = new ArrayList<>();
@@ -66,6 +65,7 @@ public class Task9_1 {
                     throw new Exception("Зоны расположены не в алфавитном порядке");
                 }
                 driver.navigate().back();
+                countries = driver.findElements(By.cssSelector("tr.row"));
             }
         }
     }
