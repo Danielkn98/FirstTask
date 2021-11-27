@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class Task8 {
 
     private WebDriver driver;
@@ -21,9 +23,10 @@ public class Task8 {
     @Test
     public void task8() throws Exception {
         driver.get("http://localhost/litecart");
-        for (int a = 0; a < driver.findElements(By.cssSelector("li.product.column.shadow.hover-light")).size(); a++){
-            WebElement UnderVerification = driver.findElements(By.cssSelector("li.product.column.shadow.hover-light")).get(a);
-            if(UnderVerification.findElements(By.cssSelector("[class*=sticker]")).size() != 1){
+        List<WebElement> goods = driver.findElements(By.cssSelector("li.product"));
+        for (int a = 0; a < goods.size(); a++){
+            WebElement UnderVerification = goods.get(a);
+            if(UnderVerification.findElements(By.cssSelector(".sticker")).size() != 1){
                 throw new Exception("На каждый товар не приходится по одному стикеру");
             }
         }
