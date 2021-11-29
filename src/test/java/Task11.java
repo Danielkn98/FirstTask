@@ -73,6 +73,7 @@ public class Task11 {
 
         assertTrue(isElementPresent(By.cssSelector("#box-account")));
         driver.findElement(By.cssSelector("#box-account [href*=logout]")).click();
+        assertTrue(isElementPresent(By.cssSelector("#box-account-login")));
 
     }
 
