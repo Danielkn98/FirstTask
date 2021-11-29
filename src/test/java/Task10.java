@@ -130,7 +130,7 @@ public class Task10 {
             throw new Exception("На главной странице размер цены без акции больше или такой же как у акционной");
         }
         RegPriceMP.click();
-        
+
         WebElement RegPricePP = driver.findElement(By.cssSelector("#box-product .regular-price"));
         WebElement CamPricePP = driver.findElement(By.cssSelector("#box-product .campaign-price"));
         String RegPriceFontPP = RegPricePP.getCssValue("font-size");
