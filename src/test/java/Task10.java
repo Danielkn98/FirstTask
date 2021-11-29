@@ -17,7 +17,7 @@ public class Task10 {
 
     @Before
     public void start(){
-        driver = new FirefoxDriver();
+        driver = new EdgeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
@@ -120,17 +120,26 @@ public class Task10 {
         driver.get("http://localhost/litecart");
         WebElement RegPriceMP = driver.findElement(By.cssSelector("#box-campaigns li.product .regular-price"));
         WebElement CamPriceMP = driver.findElement(By.cssSelector("#box-campaigns li.product .campaign-price"));;
-        Dimension RegPriceMPD = RegPriceMP.getSize();
-        Dimension CamPriceMPD = CamPriceMP.getSize();
-        if(RegPriceMPD.getWidth() >= CamPriceMPD.getWidth() || RegPriceMPD.getHeight() >= CamPriceMPD.getHeight()){
+        String RegPriceFontMP = RegPriceMP.getCssValue("font-size");
+        String CamPriceFontMP = CamPriceMP.getCssValue("font-size");
+        String RegPriceFontMPCut = RegPriceFontMP.substring(0,RegPriceFontMP.length()-2);
+        String CamPriceFontMPCut = CamPriceFontMP.substring(0, CamPriceFontMP.length()-2);
+        Double DRegPriceFontMP = Double.parseDouble(RegPriceFontMPCut);
+        Double DCamPriceFontMP = Double.parseDouble(CamPriceFontMPCut);
+        if(DCamPriceFontMP<DRegPriceFontMP){
             throw new Exception("На главной странице размер цены без акции больше или такой же как у акционной");
         }
         RegPriceMP.click();
+        
         WebElement RegPricePP = driver.findElement(By.cssSelector("#box-product .regular-price"));
         WebElement CamPricePP = driver.findElement(By.cssSelector("#box-product .campaign-price"));
-        Dimension RegPricePPD = RegPricePP.getSize();
-        Dimension CamPricePPD = CamPricePP.getSize();
-        if(RegPricePPD.getWidth() >= CamPricePPD.getWidth() || RegPricePPD.getHeight() >= CamPricePPD.getHeight()){
+        String RegPriceFontPP = RegPricePP.getCssValue("font-size");
+        String CamPriceFontPP = CamPricePP.getCssValue("font-size");
+        String RegPriceFontPPCut = RegPriceFontPP.substring(0,RegPriceFontPP.length()-2);
+        String CamPriceFontPPCut = CamPriceFontPP.substring(0, CamPriceFontPP.length()-2);
+        Double DRegPriceFontPP = Double.parseDouble(RegPriceFontPPCut);
+        Double DCamPriceFontPP = Double.parseDouble(CamPriceFontPPCut);
+        if(DCamPriceFontPP<DRegPriceFontPP){
             throw new Exception("На странице товара размер цены без акции больше или такой же как у акционной");
         }
     }
