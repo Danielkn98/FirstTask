@@ -4,7 +4,11 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -101,8 +105,15 @@ public class Task12 {
         String absolute = b.getCanonicalPath();
         driver.findElement(By.cssSelector("[type=file]")).sendKeys(absolute);
 
-        generalSet.findElement(By.cssSelector("[name=date_valid_from]")).sendKeys("02122021");
-        generalSet.findElement(By.cssSelector("[name=date_valid_to]")).sendKeys("25022022");
+        String browserName = (String) ((HasCapabilities) driver).getCapabilities().getCapability(CapabilityType.BROWSER_NAME);
+
+        if(browserName.equals("firefox")){
+            generalSet.findElement(By.cssSelector("[name=date_valid_from]")).sendKeys("2021-12-02");
+            generalSet.findElement(By.cssSelector("[name=date_valid_to]")).sendKeys("2022-02-25");
+        }else{
+            generalSet.findElement(By.cssSelector("[name=date_valid_from]")).sendKeys("02122021");
+            generalSet.findElement(By.cssSelector("[name=date_valid_to]")).sendKeys("25022022");
+        }
 
         driver.findElement(By.cssSelector("[href='#tab-information']")).click();
         assertTrue(isElementPresent(By.cssSelector("#tab-information")));

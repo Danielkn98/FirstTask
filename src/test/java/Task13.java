@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 
 public class Task13 {
@@ -61,13 +61,18 @@ public class Task13 {
         WebElement CheckoutSummary = driver.findElement(By.cssSelector("#box-checkout-summary"));
         List <WebElement> CheckoutSummaryProducts = CheckoutSummary.findElements(By.cssSelector("td.item"));
         int typesOfProductsInCart = CheckoutSummaryProducts.size();
-        for (int a = typesOfProductsInCart-1; a >=0; a--){
-            // Кликаем по первой попавшейся кнопке, т.к. порядок удаления нам не важен
-            driver.findElement(By.cssSelector("button[value=Remove]")).click();
-            if(a==typesOfProductsInCart-1){
+        while (true){
+            if(isElementPresent(By.cssSelector("button[value=Remove]"))){
+                WebElement removeButton = driver.findElement(By.cssSelector("button[value=Remove]"));
+                wait.until(visibilityOf(removeButton));
+                removeButton.click();
+                wait.until(numberOfElementsToBe(By.cssSelector("td.item"), typesOfProductsInCart-1));
+                typesOfProductsInCart--;
+                continue;
+            }
+            else{
                 wait.until(ExpectedConditions.stalenessOf(CheckoutSummary));
-            }else{
-                wait.until(ExpectedConditions.stalenessOf(CheckoutSummaryProducts.get(a)));
+                break;
             }
         }
     }
