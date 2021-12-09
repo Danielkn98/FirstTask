@@ -36,7 +36,7 @@ public class Task17 {
                 String ProductName = driver.findElement(By.cssSelector("input[name='name[en]']")).getAttribute("value");
                 List<LogEntry> logs = driver.manage().logs().get("browser").getAll();
                 if(logs.size()!=0){
-                    System.out.println("При открытии страницы редактирования товара "+ProductName+" в логе браузера появтлись следующие сообщения:");
+                    System.out.println("При открытии страницы редактирования товара "+ProductName+" в логе браузера появились следующие сообщения:");
                     logs.forEach(log -> System.out.println(log));
                 }
                 driver.navigate().back();
