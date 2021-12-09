@@ -7,12 +7,16 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -48,15 +52,15 @@ public class Task12 {
     }
 
     @Before
-    public void start(){
-        driver = new ChromeDriver();
+    public void start() throws MalformedURLException {
+        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new InternetExplorerOptions());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver,10);
     }
 
     @Test
     public void task12() throws IOException {
-        driver.get("http://localhost/litecart/admin");
+        driver.get("http://192.168.1.68/litecart/admin");
         driver.findElement(By.cssSelector("#box-login [name = username]")).sendKeys("admin");
         driver.findElement(By.cssSelector("#box-login [name = password]")).sendKeys("admin");
         driver.findElement(By.cssSelector(".footer [name = login]")).click();

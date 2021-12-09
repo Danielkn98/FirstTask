@@ -4,7 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
@@ -30,14 +36,14 @@ public class Task11 {
     }
 
     @Before
-    public void start(){
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void start() throws MalformedURLException {
+        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new FirefoxOptions());
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test
     public void task11(){
-        driver.get("http://localhost/litecart/en/create_account");
+        driver.get("http://192.168.1.68/litecart/en/create_account");
         assertTrue(isElementPresent(By.cssSelector("form")));
         WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[name=tax_id]")).sendKeys("457894251");

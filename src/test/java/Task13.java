@@ -1,15 +1,21 @@
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -18,6 +24,10 @@ public class Task13 {
 
     private WebDriver driver;
     private WebDriverWait wait;
+
+    public static final String USERNAME = "bsuser_92bISj";
+    public static final String AUTOMATE_KEY = "QdbzETDDgoFuDnCRQwLX";
+    public static final String MyURL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
     private boolean isElementPresent(By locator) {
         try {
@@ -30,14 +40,25 @@ public class Task13 {
     }
 
     @Before
-    public void start(){
-        driver = new ChromeDriver();
+    public void start() throws MalformedURLException {
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "FireFox");
+        capabilities.setCapability("browserVersion", "latest");
+
+        HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
+        browserstackOptions.put("os", "Windows");
+        browserstackOptions.put("osVersion", "11");
+
+        capabilities.setCapability("bstack:options", browserstackOptions);
+
+        driver = new RemoteWebDriver(new URL(MyURL), new DesiredCapabilities(capabilities));
         wait = new WebDriverWait(driver,10);
     }
 
     @Test
     public void task13(){
-        driver.get("http://localhost/litecart");
+        driver.get("https://litecart.stqa.ru");
         int numberOfProducts = 3;
         for (int a = 0; a<numberOfProducts; a++) {
             List<WebElement> productsMP = driver.findElements(By.cssSelector("#box-most-popular li"));

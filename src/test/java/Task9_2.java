@@ -5,7 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +30,7 @@ public class Task9_2 {
     }
 
     @Before
-    public void start(){
+    public void start() throws MalformedURLException {
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -34,7 +38,7 @@ public class Task9_2 {
 
     @Test
     public void task9_2() throws Exception{
-        driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+        driver.get("http://192.168.1.68/litecart/admin/?app=geo_zones&doc=geo_zones");
         driver.findElement(By.cssSelector("#box-login [name = username]")).sendKeys("admin");
         driver.findElement(By.cssSelector("#box-login [name = password]")).sendKeys("admin");
         driver.findElement(By.cssSelector(".footer [name = login]")).click();
