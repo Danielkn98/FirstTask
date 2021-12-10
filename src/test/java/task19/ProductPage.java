@@ -22,11 +22,11 @@ public class ProductPage extends Page {
         quantityToAdd = quantity;
         new Actions(driver)
                 .moveToElement(driver.findElement(By.cssSelector("[name=quantity]"))).click()
-                        .keyDown(Keys.CONTROL).sendKeys("a")
-                        .keyUp(Keys.CONTROL)
-                                .sendKeys(Keys.DELETE)
-                                .sendKeys(Integer.toString(quantityToAdd))
-                                        .perform();
+                .keyDown(Keys.CONTROL).sendKeys("a")
+                .keyUp(Keys.CONTROL)
+                .sendKeys(Keys.DELETE)
+                .sendKeys(Integer.toString(quantityToAdd))
+                .perform();
     }
 
     public static void chooseSize(String sizeIfPossible) {
